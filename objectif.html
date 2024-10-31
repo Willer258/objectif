@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Données JSON depuis Google Sheets</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 3rem;
+        min-height: 100vh;
+      "
+    >
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <h1><span id="caWAFA">5.000.000</span> / 200,000,000 FCFA</h1>
+        <div class="container">
+          <div class="water_wave"></div>
+        </div>
+
+        <h1>Objectif CA WAFA</h1>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <h1><span id="caWiASSUR">5.000.000</span> / 2,214,588,154 FCFA</h1>
+        <div class="container">
+          <div class="water_wave2"></div>
+        </div>
+
+        <h1>Objectif CA WiASSUR</h1>
+      </div>
+    </div>
+
+    <script>
+      const apiUrl =
+        "https://script.googleusercontent.com/a/macros/wiassur.com/echo?user_content_key=KZri2841rbUFWlmtDZH9Dur3UI8qYOxnAqVb5hipa-tq-xH2C1KdH1kTMut6HiXBZHQle4xhKACWNoaJB2vx4R5WCEbRXFUYOJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMi80zadyHLKC-E7GqRQ-KcZVV1__BWhSzh0lmODcuY_2ZwfNtCf-bupnix0CnAiLvA4yLmXNOLVMRARZ2TbGmWILpQQo4jFyOzE3HuLBafPuz6h7xn56g6KAi5jxTT5N0An2fGVA47lY&lib=Mu0h4yqvyx6vm8-1wixF9Cy6ShXiAKCkj"; // Remplace par l'URL de ton application Web
+
+      const dynamicStyleSheet = document.createElement("style");
+      document.head.appendChild(dynamicStyleSheet);
+
+      // Fonction pour remplir les données et les niveaux de progression
+      function remplirProgression() {
+        const data = {
+          totalWafa: 190000000,
+          totalWiassur: 50000000,
+        };
+
+        const ObjectifWafa = 200000000;
+        const ObjectifWiassur = 2214588154;
+        // Calcule les hauteurs en pourcentage
+        const pourcentageWafa = (data.totalWafa * 100) / ObjectifWafa;
+        const pourcentageWiassur = (data.totalWiassur * 100) / ObjectifWiassur;
+
+        createDynamicKeyframes("dynamicWave1", pourcentageWafa);
+        createDynamicKeyframes("dynamicWave2", pourcentageWiassur);
+
+        // Mise à jour des montants dans les éléments HTML
+        document.getElementById(
+          "caWAFA"
+        ).textContent = `${data.totalWafa.toLocaleString()} FCFA`;
+        document.getElementById(
+          "caWiASSUR"
+        ).textContent = `${data.totalWiassur.toLocaleString()} FCFA`;
+
+        document
+          .querySelector(".water_wave")
+          .style.setProperty("--top-wafa", `${100 - pourcentageWafa}%`);
+        document
+          .querySelector(".water_wave2")
+          .style.setProperty("--top-wiassur", `${100 - pourcentageWiassur}%`);
+      }
+      remplirProgression();
+
+      function createDynamicKeyframes(id, pourcentageTop) {
+        const styleSheet = document.styleSheets[0];
+        const keyframes = `
+        @keyframes ${id} {
+          0% { transform: translate(-50%,50%) rotate(0deg); top: -${
+            pourcentageTop - 5
+          }% }
+          50% { top: -${pourcentageTop}% }
+          100% { transform: translate(-50%,50%) rotate(360deg); top: -${
+            pourcentageTop - 5
+          }% }
+        }`;
+
+        // Ajoute l'animation aux styles de la page
+        dynamicStyleSheet.sheet.insertRule(
+          keyframes,
+          dynamicStyleSheet.sheet.cssRules.length
+        );
+      }
+
+
+
+fetch(apiUrl, { mode: 'no-cors' })
+.then(response => response.json())
+.then(data => {
+  console.log(data,'dara');
+  // Assure-toi que les données contiennent les valeurs correctes
+  if (data && data[0]) {
+    remplirProgression(data); // Appelle avec les données API
+  }
+})
+.catch(error => console.error('Erreur :', error));
+      
+    </script>
+  </body>
+</html>
