@@ -43,11 +43,8 @@
       document.head.appendChild(dynamicStyleSheet);
 
       // Fonction pour remplir les données et les niveaux de progression
-      function remplirProgression() {
-        const data = {
-          totalWafa: 190000000,
-          totalWiassur: 50000000,
-        };
+      function remplirProgression(data) {
+      
 
         const ObjectifWafa = 200000000;
         const ObjectifWiassur = 2214588154;
@@ -73,7 +70,6 @@
           .querySelector(".water_wave2")
           .style.setProperty("--top-wiassur", `${100 - pourcentageWiassur}%`);
       }
-      remplirProgression();
 
       function createDynamicKeyframes(id, pourcentageTop) {
         const styleSheet = document.styleSheets[0];
@@ -97,17 +93,22 @@
 
 
 
-fetch(apiUrl)
-.then(response => response.json())
+fetch('https://script.google.com/macros/s/AKfycbzRy4KzJ6AvL8mnOcUi9_qbPACSG-XjS-upBAWOfB-I0wZNsP7ul_rnAj08b7_zGa2A2A/exec')
+.then(response => {
+  if (!response.ok) {
+    throw new Error('Erreur dans la réponse du réseau');
+  }
+  return response.json(); // Convertir la réponse en JSON
+})
 .then(data => {
-  console.log(data,'dara');
-  // Assure-toi que les données contiennent les valeurs correctes
+  console.log('Données reçues :', data); // Afficher les données dans la console
   if (data && data[0]) {
-    remplirProgression(data); // Appelle avec les données API
+    remplirProgression(data[0]); // Appelle avec les données API
   }
 })
-.catch(error => console.error('Erreur :', error));
-      
+.catch(error => {
+  console.error('Il y a eu un problème avec la requête fetch :', error);
+});
     </script>
   </body>
 </html>

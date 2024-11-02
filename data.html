@@ -57,60 +57,24 @@
 
 
   <script>
-    const apiUrl = 'https://script.googleusercontent.com/a/macros/wiassur.com/echo?user_content_key=0tpVJDfiKg1JFE5g7_C0oNv64jwWiLQKOHdsOJBERvDWhpKRLV_3pjsFGJoVddyotYMbHpbNqaCj-9wo7SqQ6cXfOUuLH19fm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_nRPgeZU6HP-o37QVoniWljl6Ik47hUqRHT_Esuc5rszJvH-rJXwaNxHK8MgFrYyUgNmlJWva0XuqMTic1mH0vVDt5HQjKl4z5PODTLTamnhWYebVgXe2VZ7PxSqiab2GvJsw0wqpxiI&lib=MhIuDqUdkD-56_q02PXXKxDeq61UZLkcC';  // Remplace par l'URL de ton application Web
+   // Effectuer une requête GET
+fetch('https://script.google.com/macros/s/AKfycbzRy4KzJ6AvL8mnOcUi9_qbPACSG-XjS-upBAWOfB-I0wZNsP7ul_rnAj08b7_zGa2A2A/exec')
+.then(response => {
+  if (!response.ok) {
+    throw new Error('Erreur dans la réponse du réseau');
+  }
+  return response.json(); // Convertir la réponse en JSON
+})
+.then(data => {
+  console.log('Données reçues :', data); // Afficher les données dans la console
+})
+.catch(error => {
+  console.error('Il y a eu un problème avec la requête fetch :', error);
+});
 
-    function remplirEpprouvette(data) {
-      console.log(data);
-      const total = 200000000
-      const niveau = document.getElementById('niveau');
-      console.log((data*100)/total);
-      niveau.style.height = `${(data*100)/total}%`;
-    }
-    // Fonction pour charger et afficher les données
-    fetch(apiUrl, { mode: 'no-cors' })
-      .then(response => response.json())
-      .then(data => {
-        const tableHead = document.querySelector('#data-table thead');
-        const tableBody = document.querySelector('#data-table tbody');
-
-        // Ajouter les en-têtes
-        const headers = Object.keys(data[0]);
-        const headerRow = document.createElement('tr');
-        headers.forEach(header => {
-          const th = document.createElement('th');
-          th.textContent = header;
-          headerRow.appendChild(th);
-        });
-        tableHead.appendChild(headerRow);
-        
-        remplirEpprouvette(data[0].totalWafa)
-        
-        // Ajouter les lignes de données
-        data.forEach(row => {
-          const tr = document.createElement('tr');
-          headers.forEach(header => {
-            const td = document.createElement('td');
-            td.textContent = row[header];
-            tr.appendChild(td);
-          });
-          tableBody.appendChild(tr);
-        });
-      })
-      .catch(error => console.error('Erreur :', error));
   </script>
 
 </body>
 </html>
 
 
-
-fetch(apiUrl, { mode: 'no-cors' })
-.then(response => response.json())
-.then(data => {
-  console.log(data,'dara');
-  // Assure-toi que les données contiennent les valeurs correctes
-  if (data && data[0]) {
-    remplirProgression(data); // Appelle avec les données API
-  }
-})
-.catch(error => console.error('Erreur :', error));
