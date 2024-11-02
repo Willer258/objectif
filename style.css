@@ -50,12 +50,12 @@ body{
 
 .water_wave:after{
     border-radius: 45%;
-    animation:water_wave 5s linear infinite;
+    animation:dynamicWave1 5s linear infinite;
 }
 .water_wave:before{
     border-radius: 35%;
     background: green;
-    animation:water_wave 5s linear infinite;
+    animation:dynamicWave1 5s linear infinite;
 }
 
 
@@ -91,12 +91,12 @@ body{
 
 .water_wave2:after{
     border-radius: 45%;
-    /* animation:water_wave2 5s linear infinite; */
+    animation:dynamicWave2 5s linear infinite;
 }
 .water_wave2:before{
     border-radius: 35%;
     background:#61C0C7;
-    /* animation:water_wave2 5s linear infinite; */
+    animation:dynamicWave2 5s linear infinite;
 }
 
 /* 
