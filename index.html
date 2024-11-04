@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+
+    <h1 style="-top: 5rem;">
+      Allez la team on peut y arriver
+    </h1>
+
+    <p>
+      Ensemble, nous pouvons atteindre nos objectifs ! Chaque effort que nous faisons nous rapproche de la réussite. Remplissons nos jauges d’objectif avec détermination et enthousiasme. Gardons notre motivation haute et avançons unis vers le succès. Nous avons tout ce qu’il faut pour y arriver, alors continuons sur cette lancée ! 💪🚀
+    </p>
+
+    <h1 style="position: absolute; top:20% ; left:0% ; right:0" id="countdown"> </h1>
+   
     <div
       style="
         display: flex;
@@ -16,8 +27,9 @@
         min-height: 100vh;
       "
     >
+
       <div style="display: flex; flex-direction: column; align-items: center">
-        <h1><span id="caWAFA">5.000.000</span> / 200,000,000 FCFA</h1>
+        <h1><span id="caWAFA">0</span> / 200,000,000 FCFA</h1>
         <div class="container">
           <div class="water_wave"></div>
         </div>
@@ -26,7 +38,7 @@
       </div>
 
       <div style="display: flex; flex-direction: column; align-items: center">
-        <h1><span id="caWiASSUR">5.000.000</span> / 2,214,588,154 FCFA</h1>
+        <h1><span id="caWiASSUR">0</span> / 2,214,588,154 FCFA</h1>
         <div class="container">
           <div class="water_wave2"></div>
         </div>
@@ -109,6 +121,29 @@ fetch('https://script.google.com/macros/s/AKfycbzRy4KzJ6AvL8mnOcUi9_qbPACSG-XjS-
 .catch(error => {
   console.error('Il y a eu un problème avec la requête fetch :', error);
 });
+
+
+function updateCountdown() {
+  const now = new Date();
+  const newYear = new Date(now.getFullYear() + 1, 0, 1);
+  const timeDifference = newYear - now;
+
+  const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+  document.getElementById('countdown').innerHTML = 
+      `${days} jours, ${hours} heures, ${minutes} minutes, ${seconds} secondes`;
+
+  if (timeDifference < 0) {
+      document.getElementById('countdown').innerHTML = "Bonne année !";
+  }
+}
+
+setInterval(updateCountdown, 1000);
+
+
     </script>
   </body>
 </html>
