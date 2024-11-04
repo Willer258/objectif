@@ -44,14 +44,12 @@
     <div>
 
       <h1 style="-top: 5rem;">
-        Allez la team on peut y arriver
+        L'ARGENT APPELLE L'ARGENT!!!
       </h1>
   
-      <p>
-        Ensemble, nous pouvons atteindre nos objectifs ! Chaque effort que nous faisons nous rapproche de la réussite. Remplissons nos jauges d’objectif avec détermination et enthousiasme. Gardons notre motivation haute et avançons unis vers le succès. Nous avons tout ce qu’il faut pour y arriver, alors continuons sur cette lancée ! 💪🚀
-      </p>
+     
   
-      <h1 style="position: absolute; top:20% ; left:0% ; right:0" id="countdown"> </h1>
+      <h1 style="position: absolute; top:10% ; left:0% ; right:0" id="countdown"> </h1>
      
       <div
         style="
@@ -63,22 +61,26 @@
         "
       >
   
-        <div style="display: flex; flex-direction: column; align-items: center">
+        <div id="wafa" style="display: flex; flex-direction: column; align-items: center">
           <h1><span id="caWAFA">0</span> / 200,000,000 FCFA</h1>
           <div class="container">
-            <div class="water_wave"></div>
+            <img  class="beaker" src="./chartwafa.svg" alt="">
+             <div class="water_wave"></div>
           </div>
   
-          <h1>Objectif CA WAFA</h1>
+          <h1>Defi interne CA WAFA</h1>
         </div>
+
+        
   
-        <div style="display: flex; flex-direction: column; align-items: center">
+        <div id="wiassur" style="display: flex; flex-direction: column; align-items: center">
           <h1><span id="caWiASSUR">0</span> / 2,214,588,154 FCFA</h1>
-          <div class="container">
-            <div class="water_wave2"></div>
+          <div class="container">            
+            <img  class="beaker" src="./chartglobal.svg" alt="">
+            <div  class="water_wave2"></div>
           </div>
   
-          <h1>Objectif CA WiASSUR</h1>
+          <h1>Defi interne CA WiASSUR</h1>
         </div>
       </div>
 
@@ -96,15 +98,19 @@
       // Fonction pour remplir les données et les niveaux de progression
       function remplirProgression(data) {
       
-
+     
         const ObjectifWafa = 200000000;
         const ObjectifWiassur = 2214588154;
         // Calcule les hauteurs en pourcentage
         const pourcentageWafa = (data.totalWafa * 100) / ObjectifWafa;
-        const pourcentageWiassur = (data.totalWiassur * 100) / ObjectifWiassur;
+        const pourcentageWiassur = ((data.totalWiassur * 100) / ObjectifWiassur) ;
 
-        createDynamicKeyframes("dynamicWave1", pourcentageWafa);
-        createDynamicKeyframes("dynamicWave2", pourcentageWiassur);
+        
+        console.log(pourcentageWafa,'wafa');
+        console.log(pourcentageWiassur,'wiassur');
+
+        createDynamicKeyframes("dynamicWave1", pourcentageWafa +30);
+        createDynamicKeyframes("dynamicWave2", pourcentageWiassur -7);
 
         // Mise à jour des montants dans les éléments HTML
         document.getElementById(
@@ -123,18 +129,18 @@
       }
 
       function createDynamicKeyframes(id, pourcentageTop) {
-        const styleSheet = document.styleSheets[0];
         const keyframes = `
         @keyframes ${id} {
-          0% { transform: translate(-50%,50%) rotate(0deg); top: -${
-            pourcentageTop - 5
+          0% { transform: translate(-50%,50%) rotate(0deg); top: ${
+            pourcentageTop
           }% }
-          50% { top: -${pourcentageTop}% }
-          100% { transform: translate(-50%,50%) rotate(360deg); top: -${
-            pourcentageTop - 5
+          50% { top: ${pourcentageTop}% }
+          100% { transform: translate(-50%,50%) rotate(360deg); top: ${
+            pourcentageTop 
           }% }
         }`;
 
+        console.log(keyframes,'oo');
         // Ajoute l'animation aux styles de la page
         dynamicStyleSheet.sheet.insertRule(
           keyframes,
@@ -155,7 +161,7 @@ function updateCountdown() {
   const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
   document.getElementById('countdown').innerHTML = 
-      `Il nous reste ${days} jours, ${hours} heures, ${minutes} minutes, ${seconds} secondes avant la fin de l'année COURAGE 💪🦾 !!!`;
+      ` ${days} jours, ${hours} heures, ${minutes} minutes, ${seconds} secondes avant la fin de l'année !!!`;
 
   if (timeDifference < 0) {
       document.getElementById('countdown').innerHTML = "Bonne année !";
@@ -202,6 +208,43 @@ setInterval(verifierEtExecuter, 60000);
 
 maFonction()
 
+window.onload = function() {
+  const wafaDiv = document.getElementById('wafa');
+  const wiassurDiv = document.getElementById('wiassur');
+
+  // Masquer WiASSUR au départ
+  wiassurDiv.classList.add('hidden');
+
+  // Fonction pour afficher Wafa, puis WiASSUR
+  function showWafa() {
+      wafaDiv.classList.remove('hidden', 'fade-out');
+      wafaDiv.classList.add('fade-in');
+
+      setTimeout(() => {
+          wafaDiv.classList.add('fade-out');
+          setTimeout(() => {
+              wafaDiv.classList.add('hidden'); // Cache Wafa après fade-out
+              showWiassur(); // Appel à la fonction pour afficher WiASSUR
+          }, 1000); // Durée de l'animation de disparition
+      }, 15000); // Afficher Wafa pendant 15 secondes
+  }
+
+  function showWiassur() {
+      wiassurDiv.classList.remove('hidden', 'fade-out');
+      wiassurDiv.classList.add('fade-in');
+
+      setTimeout(() => {
+          wiassurDiv.classList.add('fade-out');
+          setTimeout(() => {
+              wiassurDiv.classList.add('hidden'); // Cache WiASSUR après fade-out
+              showWafa(); // Appel à la fonction pour afficher Wafa
+          }, 1000); // Durée de l'animation de disparition
+      }, 30000); // Afficher WiASSUR pendant 30 secondes
+  }
+
+  // Démarre le cycle d'animation
+  showWafa(); // Commencer avec Wafa
+};
     </script>
   </body>
 </html>
