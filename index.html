@@ -105,6 +105,29 @@
 
 
 
+function updateCountdown() {
+  const now = new Date();
+  const newYear = new Date(now.getFullYear() + 1, 0, 1);
+  const timeDifference = newYear - now;
+
+  const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+  document.getElementById('countdown').innerHTML = 
+      `Il nous reste ${days} jours, ${hours} heures, ${minutes} minutes, ${seconds} secondes avant la fin de l'année COURAGE 💪🦾 !!!`;
+
+  if (timeDifference < 0) {
+      document.getElementById('countdown').innerHTML = "Bonne année !";
+  }
+}
+
+setInterval(updateCountdown, 1000);
+
+function maFonction() {
+  console.log("La fonction s'exécute !");
+  
 fetch('https://script.google.com/macros/s/AKfycbzRy4KzJ6AvL8mnOcUi9_qbPACSG-XjS-upBAWOfB-I0wZNsP7ul_rnAj08b7_zGa2A2A/exec')
 .then(response => {
   if (!response.ok) {
@@ -123,26 +146,22 @@ fetch('https://script.google.com/macros/s/AKfycbzRy4KzJ6AvL8mnOcUi9_qbPACSG-XjS-
 });
 
 
-function updateCountdown() {
-  const now = new Date();
-  const newYear = new Date(now.getFullYear() + 1, 0, 1);
-  const timeDifference = newYear - now;
+}
 
-  const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-  document.getElementById('countdown').innerHTML = 
-      `${days} jours, ${hours} heures, ${minutes} minutes, ${seconds} secondes`;
-
-  if (timeDifference < 0) {
-      document.getElementById('countdown').innerHTML = "Bonne année !";
+function verifierEtExecuter() {
+  const maintenant = new Date();
+  const heure = maintenant.getHours();
+  const minutes = maintenant.getMinutes();
+  
+  // Vérifie s'il est exactement 8h00 ou 18h00
+  if ((heure === 8 || heure === 18) && minutes === 0) {
+      maFonction();
   }
 }
 
-setInterval(updateCountdown, 1000);
+setInterval(verifierEtExecuter, 60000);
 
+maFonction()
 
     </script>
   </body>
