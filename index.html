@@ -8,7 +8,7 @@
   </head>
   <body>
 
-    <div id="bg-wrap">
+    <div id="bg-wrap" style="position: fixed; top:0 ; bottom:0; left:0 ; right:0 ; opacity:0.3">
       <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
       <defs>
       <radialGradient id="Gradient1" cx="50%" cy="50%" fx="0.441602%" fy="50%" r=".5"><animate attributeName="fx" dur="34s" values="0%;3%;0%" repeatCount="indefinite"></animate><stop offset="0%" stop-color="rgba(255, 0, 255, 1)"></stop><stop offset="100%" stop-color="rgba(255, 0, 255, 0)"></stop></radialGradient>
@@ -41,44 +41,50 @@
       </svg>
     </div>
 
-    <h1 style="-top: 5rem;">
-      Allez la team on peut y arriver
-    </h1>
+    <div>
 
-    <p>
-      Ensemble, nous pouvons atteindre nos objectifs ! Chaque effort que nous faisons nous rapproche de la réussite. Remplissons nos jauges d’objectif avec détermination et enthousiasme. Gardons notre motivation haute et avançons unis vers le succès. Nous avons tout ce qu’il faut pour y arriver, alors continuons sur cette lancée ! 💪🚀
-    </p>
-
-    <h1 style="position: absolute; top:20% ; left:0% ; right:0" id="countdown"> </h1>
-   
-    <div
-      style="
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        padding: 3rem;
-        min-height: 100vh;
-      "
-    >
-
-      <div style="display: flex; flex-direction: column; align-items: center">
-        <h1><span id="caWAFA">0</span> / 200,000,000 FCFA</h1>
-        <div class="container">
-          <div class="water_wave"></div>
+      <h1 style="-top: 5rem;">
+        Allez la team on peut y arriver
+      </h1>
+  
+      <p>
+        Ensemble, nous pouvons atteindre nos objectifs ! Chaque effort que nous faisons nous rapproche de la réussite. Remplissons nos jauges d’objectif avec détermination et enthousiasme. Gardons notre motivation haute et avançons unis vers le succès. Nous avons tout ce qu’il faut pour y arriver, alors continuons sur cette lancée ! 💪🚀
+      </p>
+  
+      <h1 style="position: absolute; top:20% ; left:0% ; right:0" id="countdown"> </h1>
+     
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          padding: 3rem;
+          min-height: 100vh;
+        "
+      >
+  
+        <div style="display: flex; flex-direction: column; align-items: center">
+          <h1><span id="caWAFA">0</span> / 200,000,000 FCFA</h1>
+          <div class="container">
+            <div class="water_wave"></div>
+          </div>
+  
+          <h1>Objectif CA WAFA</h1>
         </div>
-
-        <h1>Objectif CA WAFA</h1>
+  
+        <div style="display: flex; flex-direction: column; align-items: center">
+          <h1><span id="caWiASSUR">0</span> / 2,214,588,154 FCFA</h1>
+          <div class="container">
+            <div class="water_wave2"></div>
+          </div>
+  
+          <h1>Objectif CA WiASSUR</h1>
+        </div>
       </div>
 
-      <div style="display: flex; flex-direction: column; align-items: center">
-        <h1><span id="caWiASSUR">0</span> / 2,214,588,154 FCFA</h1>
-        <div class="container">
-          <div class="water_wave2"></div>
-        </div>
 
-        <h1>Objectif CA WiASSUR</h1>
-      </div>
     </div>
+
 
     <script>
       const apiUrl =
